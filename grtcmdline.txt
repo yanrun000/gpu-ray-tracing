@@ -1,4 +1,4 @@
---mesh=/home/work/RayTracing/From_huang/gpu-ray-traversal/scenes/rt/conference/conference.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="6omr/04j3200bR6Z/0/3ZEAz/x4smy19///c/05frY109Qx7w////m100"
+--mesh=/home/work/RayTracing/From_huang/scenes/rt/conference/conference.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="6omr/04j3200bR6Z/0/3ZEAz/x4smy19///c/05frY109Qx7w////m100"
 --mesh=/home/workspace/global-illumination/bench-scenes/conference/conference.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="Lpmr/07k3200CS6Z/0/QqOIz1qfnsx19///c/05frY109Qx7w////m100"
 --mesh=/home/workspace/global-illumination/bench-scenes/conference/conference.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="Y1BR00IkZd/0aA9X/0/Gy8Px1ca7Tw19///c/05frY109Qx7w////m100"
 --mesh=/home/workspace/global-illumination/bench-scenes/conference/conference.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="XYDl00Gqv600byxY/00IQE4x/jN1jx/9///c/05frY109Qx7w////m100"

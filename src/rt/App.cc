@@ -39,10 +39,10 @@
 #include "bvh/BVH.hh"
 #include "gpu/CudaModule.hh"
 
-#define DISPLAY_RESULT 0
+// #define DISPLAY_RESULT 0
 
 //Ray type: 0 -- Primary; 1 -- AO; 2 -- Diffuse
-#define RAY_TYPE 2
+#define RAY_TYPE 0
 
 GLuint                      glBufferObj;
 cudaGraphicsResource        *cudaResource;
@@ -163,9 +163,9 @@ void FW::runBenchmark(
     renderer.setBuildParams(buildParams);
     renderer.setMesh(importMesh(meshFile));
     
-#ifdef DISPLAY_RESULT
-    initCudaGL();
-#endif
+// #ifdef DISPLAY_RESULT
+//     initCudaGL();
+// #endif
     
     //Cameras are moved out of the loop, because there is always one camera.
     CameraControls camera;
@@ -192,16 +192,16 @@ void FW::runBenchmark(
     while(renderer.nextBatch())
     {
         totalTracingTime += renderer.traceBatch();//这个意味着trace的时间在增加
-#ifdef DISPLAY_RESULT
-        renderer.updateResult(dev_imagePtr);
-#endif
+// #ifdef DISPLAY_RESULT
+//         renderer.updateResult(dev_imagePtr);
+// #endif
     }    
     
     printf("Results = %.2f M Rays/s\n", (float) totalRays /((1000.0f) * totalTracingTime));
 
-#ifdef DISPLAY_RESULT
-    displayResult();
-#endif
+// #ifdef DISPLAY_RESULT
+//     displayResult();
+// #endif
 
 }
 

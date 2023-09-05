@@ -143,6 +143,9 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
     
     if(rays.getNeedClosestHit()) printf("Any Hit: FALSE\n");
     else printf("Any Hit: TRUE\n");
+
+
+    // printf("rays.x = %f\n",(float4*) rays.getRayBuffer_dev());
     
     float trace_time = launch_tracingKernel(numBlocks * blockSize.x * blockSize.y, blockSize, numRays, (rays.getNeedClosestHit()) ? 0 : 1, (float4*) rays.getRayBuffer_dev(),
                          (int4*) rays.getResultBuffer_dev(), 
