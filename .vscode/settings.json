@@ -1,0 +1,12 @@
+{
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "thread": "cpp",
+        "__locale": "cpp",
+        "ios": "cpp",
+        "random": "cpp"
+    },
+    "files.watcherExclude": {
+        "**/target": true
+    }
+}
