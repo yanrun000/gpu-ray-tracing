@@ -110,6 +110,7 @@ void Renderer::beginFrame(const CameraControls& camera)
 {
     FW_ASSERT(m_mesh);
 
+    // Second_Ray = false;
     // Setup BVH.
     m_tracer.setBVH(getCudaBVH());//这个实例化的结果是将getCudaBVH的值赋予m_bvh
 
@@ -124,13 +125,13 @@ void Renderer::beginFrame(const CameraControls& camera)
         invert(Mat4f::fitToView(-1.0f, 2.0f, m_ViewSize) * camera.getWorldToClip()),
         size.x, size.y, camera.getFar());
 
-    // printf("m_shadowStartIdx = %d", m_raygen.StartIdx);
+    // printf("m_shadowStartIdx = %d", m_raygen.StartIdx);m_
 
     // Secondary rays enabled => trace primary rays.
 
     if (m_params.rayType != RayType_Primary)
     {
-        m_tracer.traceBatch(m_primaryRays);
+        m_tracer.traceBatch(m_primaryRays);    
     }
 
     // Initialize state.

@@ -29,7 +29,7 @@
 #include "App.hh"
 #include "base/Main.hh"
 #include "base/String.hh"
-
+// #define Second_Ray 
 //using namespace FW;
 
 //------------------------------------------------------------------------

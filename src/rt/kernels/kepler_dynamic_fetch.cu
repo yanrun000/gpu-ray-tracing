@@ -131,7 +131,18 @@ TRACE_FUNC
             dirz  = d.z;
             hitT  = d.w;
 
-            
+            // int ray_id = 0;
+            // // if(Second_Ray){
+            // for(int ray_id = 0; ray_id <= 0 ; ray_id ++)
+            // {
+            //     float4 oa = FETCH_GLOBAL(rays, ray_id * 2 + 0, float4);
+            //     printf("origx = %f\n", oa.x);
+            //     // printf("hello world!  %d\n",ray_id);
+
+            // }
+            // }
+
+
             float ooeps = exp2f(-80.0f); // Avoid div by zero.
             idirx = 1.0f / (fabsf(d.x) > ooeps ? d.x : copysignf(ooeps, d.x));
             idiry = 1.0f / (fabsf(d.y) > ooeps ? d.y : copysignf(ooeps, d.y));

@@ -64,6 +64,7 @@ private:
     KernelConfig        m_kernelConfig;
     CudaBVH*            m_bvh;
     bool                IsTexMemBinded;
+    bool                m_second_ray;
 };
 
 //------------------------------------------------------------------------

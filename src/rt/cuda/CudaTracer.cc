@@ -98,7 +98,7 @@ void CudaTracer::initKernel(void)
 F32 CudaTracer::traceBatch(RayBuffer& rays)
 {
     // No rays => done.
-    
+    // Second_Ray = true;
     int numRays = rays.getSize();
     if (!numRays)
         return 0.0f;
@@ -146,7 +146,7 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
 
 
     // printf("rays.x = %f\n",(float4*) rays.getRayBuffer_dev());
-    
+    // bool second_ray = m_second_ray;
     float trace_time = launch_tracingKernel(numBlocks * blockSize.x * blockSize.y, blockSize, numRays, (rays.getNeedClosestHit()) ? 0 : 1, (float4*) rays.getRayBuffer_dev(),
                          (int4*) rays.getResultBuffer_dev(), 
                          (float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x), (float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsB.x),

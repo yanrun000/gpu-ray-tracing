@@ -129,7 +129,7 @@ extern "C"
         float4*         trisB,          /* SOA: bytes 16-31 of each triangle, AOS/Compact: unused. */ \
         float4*         trisC,          /* SOA: bytes 32-47 of each triangle, AOS/Compact: unused. */ \
         int*            triIndices)     /* Triangle index remapping table. */
-
+                                        /* This paramater is added by RunYan*/
 texture<float4, 1> t_nodesA;
 texture<float4, 1> t_trisA;
 texture<int,  1>   t_triIndices;
