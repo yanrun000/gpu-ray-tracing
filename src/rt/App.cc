@@ -169,10 +169,10 @@ void FW::runBenchmark(
     
     //Cameras are moved out of the loop, because there is always one camera.
     CameraControls camera;
-    camera.decodeSignature(cameras[0]);
+    camera.decodeSignature(cameras[0]);//～～～～～～～～～～～这里设置了camera
     //Cameras are moved out of the loop, because there is always one camera.
     
-    int rayType = RAY_TYPE;
+    int rayType = RAY_TYPE;//设置默认的光线类型
     
     S64 totalRays = 0;
     F32 totalLaunchTime = 0.0f;

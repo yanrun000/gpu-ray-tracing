@@ -30,7 +30,7 @@
 #include "cuda/Renderer.hh"
 #include "cuda/RendererKernels.hh"
 #include "base/Sort.hh"
-
+#include <iostream>///// added by yanrun 
 #include <stdio.h>
 #include <cuda_runtime.h>
 
@@ -118,7 +118,7 @@ void Renderer::beginFrame(const CameraControls& camera)
     const Vec2i& size = m_ViewSize;
     
 
-    // Generate primary rays.
+    // Generate primary rays.这个模块是用来生成初始光线的。可以拿出来研究一下
     
     m_raygen.primary(m_primaryRays,
         camera.getPosition(),
@@ -126,7 +126,9 @@ void Renderer::beginFrame(const CameraControls& camera)
         size.x, size.y, camera.getFar());
 
     // printf("m_shadowStartIdx = %d", m_raygen.StartIdx);m_
-
+    // std::cout << camera.getPosition().x << std::endl;
+    // std::cout << camera.getPosition().y << std::endl;
+    // std::cout << camera.getPosition().z << std::endl;
     // Secondary rays enabled => trace primary rays.
 
     if (m_params.rayType != RayType_Primary)

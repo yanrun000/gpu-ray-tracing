@@ -22,4 +22,10 @@ A2:在review推荐的文章中有一篇可以用来参考的测试场景集合�
 
 *2023.9.6*
 
-**http://www.styb.cn/cms/ieee_754.php**这个是日常用于转换IEEE 754和单精度浮点数的网页工具
+**http://www.styb.cn/cms/ieee_754.php**  这个是日常用于转换IEEE 754和单精度浮点数的网页工具
+
+
+*2023.9.7*
+
+发现CameraControls.cc中包括encodeSignature的函数，所以考虑从这个来当作decode的反函数，可能与blender之类的程序有一定的联系。
+

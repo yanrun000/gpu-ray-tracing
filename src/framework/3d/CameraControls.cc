@@ -416,6 +416,7 @@ void CameraControls::decodeSignature(const String& sig)
     m_near          = znear;
     m_far           = zfar;
     m_keepAligned   = keepAligned;
+    //这里通过一个函数将输入进来的camera参数调整为camera的私有变量的数值类型
 }
 
 //------------------------------------------------------------------------

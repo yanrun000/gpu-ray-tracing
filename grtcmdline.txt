@@ -25,15 +25,11 @@
 --mesh=/home/work/RayTracing/From_huang/scenes/rt/sanmiguel/sanmiguel.obj --sbvh-alpha=1.0e-6 --ao-radius=1.5 --camera="AbE3/0LWiZz/4Ccj005X5X1z1qJ13x/8BfRky/5frY108Y/:x/v3/z100"
 
 
+##bunny
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_1/bunny.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
 
 
---mesh=/home/work/RayTracing/From_huang/scenes/scenes/rt_1/conference/conference.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="6omr/04j3200bR6Z/0/3ZEAz/x4smy19///c/05frY109Qx7w////m100"
---mesh=/home/work/RayTracing/From_huang/scenes/scenes/rt_1/conference/conference.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera=":Wp802ACAD/2x9OQ/0/waE8z/IOKbx/9///c/05frY109Qx7w////m100"
---mesh=/home/work/RayTracing/From_huang/scenes/scenes/rt_1/conference/conference.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="w:ie00yxXX00ND1b/03TZ6qy1egt3x/9///c/05frY109Qx7w////m100"
+##dragon(不太能用)
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_1/dragon.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="RI/Qz/qlsUy1WTybz13BdCZy/LRxzy/8///m007toC10AnAHx///Uy200"
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_1/dragon.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="mF5Gz1SuO1z/ZMooz11Q0bGz/CCNxx18///m007toC10AnAHx///Uy200"
 
-
---mesh=/home/work/RayTracing/From_huang/scenes/scenes/rt_1/dragon.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="123451oRQmz/Xvsm005CwjHx/b70nx18tVI7005frY108Y/:x/v3/z100"
---mesh=/home/work/RayTracing/From_huang/scenes/scenes/rt_1/dragon.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="AbE3/0LWiZz/4Ccj005X5X1z1qJ13x/8BfRky/5frY108Y/:x/v3/z100"
-
-
---mesh=/home/work/RayTracing/From_huang/scenes/rt_1/sportsCar/sportsCar.obj --sbvh-alpha=1.0e-5 --ao-radius=0.3 --camera="ViGsx/KxTFz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
