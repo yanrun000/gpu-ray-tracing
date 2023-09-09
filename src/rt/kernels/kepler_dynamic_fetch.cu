@@ -122,7 +122,7 @@ TRACE_FUNC
 
             float4 o = FETCH_GLOBAL(rays, rayidx * 2 + 0, float4);
             float4 d = FETCH_GLOBAL(rays, rayidx * 2 + 1, float4);
-            origx = o.x;
+            origx = o.x;  
             origy = o.y;
             origz = o.z;
             tmin  = o.w;

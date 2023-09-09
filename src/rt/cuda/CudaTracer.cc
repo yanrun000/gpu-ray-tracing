@@ -32,6 +32,8 @@
 #include "gpu/CudaModule.hh"
 #include "kernels/CudaTracerKernels.hh"
 
+#include<iostream>
+
 //#define DUMP_RAYS
 
 //#include "gui/Window.hpp"
@@ -144,7 +146,7 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
     if(rays.getNeedClosestHit()) printf("Any Hit: FALSE\n");
     else printf("Any Hit: TRUE\n");
 
-
+   
     // printf("rays.x = %f\n",(float4*) rays.getRayBuffer_dev());
     // bool second_ray = m_second_ray;
     float trace_time = launch_tracingKernel(numBlocks * blockSize.x * blockSize.y, blockSize, numRays, (rays.getNeedClosestHit()) ? 0 : 1, (float4*) rays.getRayBuffer_dev(),
@@ -153,6 +155,19 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
                          (float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsC.x), (float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsD.x),
                          (float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x), (float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsB.x),
                          (float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsC.x), (int*) m_bvh->getTriIndexBuffer_dev());
+
+    // Ray*    rays;           // Ray*
+ 
+    float* rays_get = float4* rays.getRayBuffer_dev()
+    // int     rayidx_0;
+    for(int rayidx_0 = 0; rayidx_0 <= 5; rayidx_0 ++){
+    
+        float4 o = FETCH_GLOBAL(rays_get, rayidx_0 * 2 + 0, float4);
+        // float4 d = FETCH_GLOBAL(float4 rays, rayidx * 2 + 1, float4);
+        float origx = o.x;  
+        std::cout << origx  << std::endl;
+    }
+
 
 #if defined(DUMP_RAYS)
     rays.dumpRayResult();
