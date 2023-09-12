@@ -156,18 +156,6 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
                          (float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x), (float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsB.x),
                          (float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsC.x), (int*) m_bvh->getTriIndexBuffer_dev());
 
-    // Ray*    rays;           // Ray*
- 
-    float* rays_get = float4* rays.getRayBuffer_dev()
-    // int     rayidx_0;
-    for(int rayidx_0 = 0; rayidx_0 <= 5; rayidx_0 ++){
-    
-        float4 o = FETCH_GLOBAL(rays_get, rayidx_0 * 2 + 0, float4);
-        // float4 d = FETCH_GLOBAL(float4 rays, rayidx * 2 + 1, float4);
-        float origx = o.x;  
-        std::cout << origx  << std::endl;
-    }
-
 
 #if defined(DUMP_RAYS)
     rays.dumpRayResult();

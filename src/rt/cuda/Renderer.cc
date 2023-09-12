@@ -33,6 +33,9 @@
 #include <iostream>///// added by yanrun 
 #include <stdio.h>
 #include <cuda_runtime.h>
+#include "kernels/CudaTracerKernels.hh"
+
+// #include "ray/RayBuffer.hh"
 
 using namespace FW;
 
@@ -138,10 +141,25 @@ void Renderer::beginFrame(const CameraControls& camera)
 
     // Initialize state.
 
+    float4* ray_o;
+    // float4* ray_d;
+
+    cudaMalloc((void**)&ray_o, sizeof(float4)* 100);
+    // cudaMalloc((void**)&ray_d, sizeof(float4)* 100);
+
+    float4* ray_s = (float4*) m_primaryRays.getRayBuffer_dev();
+
+    // fetch_rays <<<1, 1, 0 >>> (ray_s);
+
+    cudaFree(ray_o);
+
+
     m_cameraFar     = camera.getFar();
     m_newBatch      = true;
     m_batchRays     = NULL;
     m_batchStart    = 0;
+
+
 }
 
 

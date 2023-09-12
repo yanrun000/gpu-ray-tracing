@@ -31,8 +31,16 @@ A2:在review推荐的文章中有一篇可以用来参考的测试场景集合�
 
 *2023.9.11*
 
-1.通过不断测试寻找到了适合bunny和dragon的camera；  
-2.通过对cuda的学习，找到了搬运数据的函数。  
+1. 通过不断测试寻找到了适合bunny和dragon的camera；  
+2. 通过对cuda的学习，找到了搬运数据的函数。  
 光线： **copyRays**  
 BVH:  **cudaBVH**  
 三角形：**CudaBVH**  
+
+*2023.9.12*
+
+1. 使用fprintf()函数可以写入文件中;  
+2. 函数返回指针和CUDA返回数据测试。  
+上述代码均上传至github: https://github.com/yanrun000/ray_tracing_testcode.gi
+
+

@@ -50,6 +50,8 @@ extern "C"
                                float4* trisA, float4* trisB, float4* trisC, int* triIndices);
                                      
     void copy_tracing_results(RayResult* result_host, RayResult* result_dev, S32 size);
+
+    float4* fetch_rays(float4* ray_s, float4* ray_o);
 }
 
 enum

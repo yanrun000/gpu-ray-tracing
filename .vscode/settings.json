@@ -32,7 +32,11 @@
         "memory": "cpp",
         "queue": "cpp",
         "stack": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "array": "cpp",
+        "initializer_list": "cpp",
+        "__hash_table": "cpp",
+        "__split_buffer": "cpp"
     },
     "files.watcherExclude": {
         "**/target": true

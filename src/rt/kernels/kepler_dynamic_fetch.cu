@@ -385,6 +385,14 @@ extern "C" float launch_tracingKernel(S32 nthreads, Vec2i& blockSize, int numRay
     
     trace <<<dimGrid, dimBlock>>> (numRays, anyHit, rays, results, nodesA, nodesB, nodesC, nodesD, trisA, trisB, trisC, triIndices);
     
+    // float4 ray_store[0];
+    // int ray_id = 0
+    // cudaMemcpy(ray_store[0], FETCH_GLOBAL(rays, 0, float4), sizeof(float4)* 1, cudaMemcpyDeviceToHost);
+
+
+
+    // cudaFree(ray_store);
+
     cutilSafeCall(cudaEventRecord(stop, 0));
     cutilSafeCall(cudaEventSynchronize(stop));
     
