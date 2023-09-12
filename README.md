@@ -29,3 +29,10 @@ A2:在review推荐的文章中有一篇可以用来参考的测试场景集合�
 
 发现CameraControls.cc中包括encodeSignature的函数，所以考虑从这个来当作decode的反函数，可能与blender之类的程序有一定的联系。
 
+*2023.9.11*
+
+1.通过不断测试寻找到了适合bunny和dragon的camera；  
+2.通过对cuda的学习，找到了搬运数据的函数。  
+光线： **copyRays**  
+BVH:  **cudaBVH**  
+三角形：**CudaBVH**  
