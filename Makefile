@@ -52,6 +52,7 @@ SRCS +=$(RTDIR)/App.cc
 SRCS +=$(RTDIR)/Scene.cc
 SRCS +=$(RTDIR)/Util.cc
 
+SRCS +=$(CUDIR)/fetch_ray.cu#!!!!!!!!!!!!!!!
 SRCS +=$(CUDIR)/Renderer.cc
 SRCS +=$(CUDIR)/CudaBVH.cc
 SRCS +=$(CUDIR)/CudaTracer.cc

@@ -51,7 +51,10 @@ extern "C"
                                      
     void copy_tracing_results(RayResult* result_host, RayResult* result_dev, S32 size);
 
-    float4* fetch_rays(float4* ray_s, float4* ray_o);
+    float* fetch_origx(float4* ray_in);
+    float* fetch_origy(float4* ray_in);
+    float* fetch_origz(float4* ray_in);
+    float* fetch_origw(float4* ray_in);
 }
 
 enum

@@ -34,6 +34,8 @@
 
 #include<iostream>
 
+
+// #define printf_ray
 //#define DUMP_RAYS
 
 //#include "gui/Window.hpp"
@@ -156,6 +158,59 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
                          (float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x), (float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsB.x),
                          (float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsC.x), (int*) m_bvh->getTriIndexBuffer_dev());
 
+
+    // float* ray_1;
+    // ray_1 = (float*)malloc(sizeof(float)*10);
+    
+    
+    // ray_1[0] =  3.14f;
+
+#if defined(printf_ray)
+
+    float* ray_origx;
+    ray_origx = (float*)malloc(sizeof(float)*2073600);
+    ray_origx = fetch_origx((float4*) rays.getRayBuffer_dev());
+
+    float* ray_origy;
+    ray_origy = (float*)malloc(sizeof(float)*2073600);  
+    ray_origy = fetch_origy((float4*) rays.getRayBuffer_dev());
+
+    float* ray_origz;
+    ray_origz = (float*)malloc(sizeof(float)*2073600);  
+    ray_origz = fetch_origz((float4*) rays.getRayBuffer_dev());
+
+    float* ray_origw;
+    ray_origw = (float*)malloc(sizeof(float)*2073600);  
+    ray_origw = fetch_origw((float4*) rays.getRayBuffer_dev());
+   
+    FILE* fp_origix = NULL;
+    FILE* fp_origiy = NULL;
+    FILE* fp_origiz = NULL;
+    FILE* fp_origiw = NULL;
+    fp_origix = fopen("origx_h.txt","w+");
+    fp_origiy = fopen("origy_h.txt","w+");
+    fp_origiz = fopen("origz_h.txt","w+");
+    fp_origiw = fopen("tmin.txt","w+");
+
+ 
+    for(int j = 0; j < 2073600; j++) 
+    {
+        fprintf(fp_origix, "%X\n",floatToBits(ray_origx[j]));
+        fprintf(fp_origiy, "%X\n",floatToBits(ray_origy[j]));
+        fprintf(fp_origiz, "%X\n",floatToBits(ray_origz[j]));
+        fprintf(fp_origiw, "%X\n",floatToBits(ray_origw[j]));
+    }
+
+    fclose(fp_origix);
+    fclose(fp_origiy);
+    fclose(fp_origiz);
+    fclose(fp_origiw);
+    free(ray_origx);
+    free(ray_origy);
+    free(ray_origz);
+    free(ray_origw);
+
+#endif 
 
 #if defined(DUMP_RAYS)
     rays.dumpRayResult();

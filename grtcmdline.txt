@@ -29,7 +29,5 @@
 --mesh=/home/work/RayTracing/From_huang/scenes/rt_1/bunny.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
 
 
-##dragon(不太能用)
---mesh=/home/work/RayTracing/From_huang/scenes/rt_1/dragon.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="RI/Qz/qlsUy1WTybz13BdCZy/LRxzy/8///m007toC10AnAHx///Uy200"
---mesh=/home/work/RayTracing/From_huang/scenes/rt_1/dragon.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="mF5Gz1SuO1z/ZMooz11Q0bGz/CCNxx18///m007toC10AnAHx///Uy200"
-
+##dragon
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_1/dragon.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="BnAXz1/////////////DwkLx/plcRw/8///m007toC10////z///Uy200"

@@ -141,17 +141,29 @@ void Renderer::beginFrame(const CameraControls& camera)
 
     // Initialize state.
 
-    float4* ray_o;
-    // float4* ray_d;
+    // float4* ray_o;
+    // // float4* ray_d;
 
-    cudaMalloc((void**)&ray_o, sizeof(float4)* 100);
-    // cudaMalloc((void**)&ray_d, sizeof(float4)* 100);
+    // cudaMalloc((void**)&ray_o, sizeof(float4)* 1);
+    // // cudaMalloc((void**)&ray_d, sizeof(float4)* 100);
 
-    float4* ray_s = (float4*) m_primaryRays.getRayBuffer_dev();
+    // // float4* ray_s = ;
 
-    // fetch_rays <<<1, 1, 0 >>> (ray_s);
+    // fetch_rays <<<1, 1,0 >>> (ray_o);
 
-    cudaFree(ray_o);
+    // float4 ray_out[1];
+
+    // cudaMemcpy(ray_out, ray_o, sizeof(float4)*1, cudaMemcpyDeviceToHost);
+
+
+    // for(int i = 0 ; i < 1 ; i++ ){
+    //     printf("ray  = %f\n", (ray_out[i].x));
+    // }
+
+
+    // cudaFree(ray_o);
+
+
 
 
     m_cameraFar     = camera.getFar();

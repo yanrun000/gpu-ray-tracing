@@ -133,11 +133,11 @@ TRACE_FUNC
 
             // int ray_id = 0;
             // // if(Second_Ray){
-            // for(int ray_id = 0; ray_id <= 0 ; ray_id ++)
+            // for(int ray_id = 0; ray_id <= 4 ; ray_id ++)
             // {
             //     float4 oa = FETCH_GLOBAL(rays, ray_id * 2 + 0, float4);
-            //     printf("origx = %f\n", oa.x);
-            //     // printf("hello world!  %d\n",ray_id);
+            //     printf("origx!!!! = %x\n", __float_as_int(oa.x));
+                // printf("hello world!  %d\n",ray_id);
 
             // }
             // }
@@ -342,6 +342,8 @@ TRACE_FUNC
 
     } while(true);
 }
+
+
 
 //------------------------------------------------------------------------
 
