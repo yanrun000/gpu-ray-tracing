@@ -55,6 +55,21 @@ extern "C"
     float* fetch_origy(float4* ray_in);
     float* fetch_origz(float4* ray_in);
     float* fetch_origw(float4* ray_in);
+
+    float* fetch_dirx(float4* ray_in);
+    float* fetch_diry(float4* ray_in);
+    float* fetch_dirz(float4* ray_in);
+    float* fetch_dirw(float4* ray_in);
+
+    float* fetch_idirx(float4* ray_in);
+    float* fetch_idiry(float4* ray_in);
+    float* fetch_idirz(float4* ray_in);
+    
+    float* fetch_oodx(float4* ray_in);
+    float* fetch_oody(float4* ray_in);
+    float* fetch_oodz(float4* ray_in);
+    
+    float* fetch_n0xyx(float4* node_a_addr);
 }
 
 enum
@@ -134,7 +149,7 @@ extern "C"
         float4*         trisB,          /* SOA: bytes 16-31 of each triangle, AOS/Compact: unused. */ \
         float4*         trisC,          /* SOA: bytes 32-47 of each triangle, AOS/Compact: unused. */ \
         int*            triIndices)     /* Triangle index remapping table. */
-                                        /* This paramater is added by RunYan*/
+                                    
 texture<float4, 1> t_nodesA;
 texture<float4, 1> t_trisA;
 texture<int,  1>   t_triIndices;

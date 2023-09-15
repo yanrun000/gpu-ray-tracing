@@ -43,4 +43,10 @@ BVH:  **cudaBVH**
 2. 函数返回指针和CUDA返回数据测试。  
 上述代码均上传至github: https://github.com/yanrun000/ray_tracing_testcode.gi
 
+*2023.9.15*
 
+bunny   internal nodes  50876,三角形个数144500。
+
+dragon  internal nodes  301376,三角形个数910348。
+
+conference  internal nodes 105025,

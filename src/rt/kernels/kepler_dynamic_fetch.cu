@@ -131,18 +131,6 @@ TRACE_FUNC
             dirz  = d.z;
             hitT  = d.w;
 
-            // int ray_id = 0;
-            // // if(Second_Ray){
-            // for(int ray_id = 0; ray_id <= 4 ; ray_id ++)
-            // {
-            //     float4 oa = FETCH_GLOBAL(rays, ray_id * 2 + 0, float4);
-            //     printf("origx!!!! = %x\n", __float_as_int(oa.x));
-                // printf("hello world!  %d\n",ray_id);
-
-            // }
-            // }
-
-
             float ooeps = exp2f(-80.0f); // Avoid div by zero.
             idirx = 1.0f / (fabsf(d.x) > ooeps ? d.x : copysignf(ooeps, d.x));
             idiry = 1.0f / (fabsf(d.y) > ooeps ? d.y : copysignf(ooeps, d.y));
@@ -151,6 +139,42 @@ TRACE_FUNC
             oody  = origy * idiry;
             oodz  = origz * idirz;
 
+            // for(int i = 0 ; i < 20; i++)
+            // {
+            //     float4 node_a = FETCH_GLOBAL(nodesA, i * 4+1, float4);
+            //     float  n0xy_y =  node_a.y;
+            //     printf("n0xy_y [%d] = %X\n",i+1,__float_as_int(n0xy_y));
+            // }
+
+
+            // for(int ray_id = 0; ray_id < 10 ; ray_id ++)
+            // {
+            //     float4 oa = FETCH_GLOBAL(rays, ray_id * 2 + 0, float4);
+            //     float4 da = FETCH_GLOBAL(rays, ray_id * 2 + 1, float4);
+            //     float idirx_out;
+            //     float idiry_out;
+            //     float idirz_out;
+            //     float ooeps_t = exp2f(-80.0f); // Avoid div by zero.
+            //     idirx_out = 1.0f / (fabsf(da.x) > ooeps_t ? da.x : copysignf(ooeps_t, da.x));
+            //     idiry_out = 1.0f / (fabsf(da.y) > ooeps_t ? da.y : copysignf(ooeps_t, da.y));
+            //     idirz_out = 1.0f / (fabsf(da.y) > ooeps_t ? da.z : copysignf(ooeps_t, da.z));
+            //     float oodx = idirx_out * oa.x;
+            //     float oody = idiry_out * oa.y;
+            //     float oodz = idirz_out * oa.z;
+            //     printf("idirx[%d]!!!! = %X\n",ray_id,__float_as_int(idirx_out));
+            //     printf("idiry[%d]!!!! = %X\n",ray_id,__float_as_int(idiry_out));
+            //     printf("idirz[%d]!!!! = %X\n",ray_id,__float_as_int(idirz_out));
+            //     printf("oodx[%d]!!!! = %X\n",ray_id,__float_as_int(oodx));
+            //     printf("oody[%d]!!!! = %X\n",ray_id,__float_as_int(oody));
+            //     printf("oodz[%d]!!!! = %X\n",ray_id,__float_as_int(oodz));
+            // }
+
+            // float n0xy_x[5];
+            // for (int i = 0 ; i < 5; i++){
+            //     float4 n0xy = tex1Dfetch(t_nodesA, 4 * i + 0);
+            //     n0xy_x[i]  = n0xy.x;
+            //     printf("n0xy_x[%d] = %X\n",i,__float_as_int(n0xy_x[i]));
+            // }
             // Setup traversal.
 
             stackPtr = (char*)&traversalStack[0];
@@ -176,7 +200,8 @@ TRACE_FUNC
                 const float4 nz   = tex1Dfetch(t_nodesA, nodeAddr + 2); // (c0.lo.z, c0.hi.z, c1.lo.z, c1.hi.z)
                       float4 tmp  = tex1Dfetch(t_nodesA, nodeAddr + 3); // child_index0, child_index1
                       int2  cnodes= *(int2*)&tmp;
-
+  
+  
                 // Intersect the ray against the child nodes.
 
                 const float c0lox = n0xy.x * idirx - oodx;

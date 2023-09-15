@@ -34,8 +34,16 @@
 
 #include<iostream>
 
+#define ray_nums 2073600
+#define node_nums 105925
+// #define printf_ray_o
+// #define printf_ray_d
 
-// #define printf_ray
+// #define printf_ray_idir
+// #define printf_ray_ood
+
+#define printf_nodes_A
+
 //#define DUMP_RAYS
 
 //#include "gui/Window.hpp"
@@ -158,14 +166,9 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
                          (float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x), (float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsB.x),
                          (float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsC.x), (int*) m_bvh->getTriIndexBuffer_dev());
 
+//------------------------------------------------------------------------
 
-    // float* ray_1;
-    // ray_1 = (float*)malloc(sizeof(float)*10);
-    
-    
-    // ray_1[0] =  3.14f;
-
-#if defined(printf_ray)
+#if defined(printf_ray_o)//是否输出光线origx到文件
 
     float* ray_origx;
     ray_origx = (float*)malloc(sizeof(float)*2073600);
@@ -210,6 +213,159 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
     free(ray_origz);
     free(ray_origw);
 
+#endif 
+
+//------------------------------------------------------------------------
+
+#if defined(printf_ray_d)//是否输出光线dirx到文件
+
+    float* ray_dirx;
+    ray_dirx = (float*)malloc(sizeof(float)*2073600);
+    ray_dirx = fetch_dirx((float4*) rays.getRayBuffer_dev());
+
+    float* ray_diry;
+    ray_diry = (float*)malloc(sizeof(float)*2073600);  
+    ray_diry = fetch_diry((float4*) rays.getRayBuffer_dev());
+
+    float* ray_dirz;
+    ray_dirz = (float*)malloc(sizeof(float)*2073600);  
+    ray_dirz = fetch_dirz((float4*) rays.getRayBuffer_dev());
+
+    float* ray_dirw;
+    ray_dirw = (float*)malloc(sizeof(float)*2073600);  
+    ray_dirw = fetch_dirw((float4*) rays.getRayBuffer_dev());
+   
+    FILE* fp_dirx = NULL;
+    FILE* fp_diry = NULL;
+    FILE* fp_dirz = NULL;
+    FILE* fp_dirw = NULL;
+    fp_dirx = fopen("dirx_h.txt","w+");
+    fp_diry = fopen("diry_h.txt","w+");
+    fp_dirz = fopen("dirz_h.txt","w+");
+    fp_dirw = fopen("hitT.txt","w+");
+
+ 
+    for(int j = 0; j < 2073600; j++) 
+    {
+        fprintf(fp_dirx, "%X\n",floatToBits(ray_dirx[j]));
+        fprintf(fp_diry, "%X\n",floatToBits(ray_diry[j]));
+        fprintf(fp_dirz, "%X\n",floatToBits(ray_dirz[j]));
+        fprintf(fp_dirw, "%X\n",floatToBits(ray_dirw[j]));
+    }
+
+    fclose(fp_dirx);
+    fclose(fp_diry);
+    fclose(fp_dirz);
+    fclose(fp_dirw);
+    free(ray_dirx);
+    free(ray_diry);
+    free(ray_dirz);
+    free(ray_dirw);
+
+#endif 
+
+
+//------------------------------------------------------------------------
+#if defined(printf_ray_idir)//是否输出光线idir到文件
+
+    float* ray_idirx;
+    ray_idirx = (float*)malloc(sizeof(float)*2073600);
+    ray_idirx = fetch_idirx((float4*) rays.getRayBuffer_dev());
+
+    float* ray_idiry;
+    ray_idiry = (float*)malloc(sizeof(float)*2073600);  
+    ray_idiry = fetch_idiry((float4*) rays.getRayBuffer_dev());
+
+    float* ray_idirz;
+    ray_idirz = (float*)malloc(sizeof(float)*2073600);  
+    ray_idirz = fetch_idirz((float4*) rays.getRayBuffer_dev());
+   
+    FILE* fp_idirx = NULL;
+    FILE* fp_idiry = NULL;
+    FILE* fp_idirz = NULL;
+    fp_idirx = fopen("idirx_h.txt","w+");
+    fp_idiry = fopen("idiry_h.txt","w+");
+    fp_idirz = fopen("idirz_h.txt","w+");
+
+    for(int j = 0; j < 2073600; j++) 
+    {
+        fprintf(fp_idirx, "%X\n",floatToBits(ray_idirx[j]));
+        fprintf(fp_idiry, "%X\n",floatToBits(ray_idiry[j]));
+        fprintf(fp_idirz, "%X\n",floatToBits(ray_idirz[j]));
+    }
+
+    fclose(fp_idirx);
+    fclose(fp_idiry);
+    fclose(fp_idirz);
+    free(ray_idirx);
+    free(ray_idiry);
+    free(ray_idirz);
+
+#endif 
+
+//------------------------------------------------------------------------
+#if defined(printf_ray_ood)//是否输出光线ood到文件
+
+    float* ray_oodx;
+    ray_oodx = (float*)malloc(sizeof(float)*2073600);
+    ray_oodx = fetch_oodx((float4*) rays.getRayBuffer_dev());
+
+    float* ray_oody;
+    ray_oody = (float*)malloc(sizeof(float)*2073600);  
+    ray_oody = fetch_oody((float4*) rays.getRayBuffer_dev());
+
+    float* ray_oodz;
+    ray_oodz = (float*)malloc(sizeof(float)*2073600);  
+    ray_oodz = fetch_oodz((float4*) rays.getRayBuffer_dev());
+   
+    FILE* fp_oodx = NULL;
+    FILE* fp_oody = NULL;
+    FILE* fp_oodz = NULL;
+    fp_oodx = fopen("oodx_h.txt","w+");
+    fp_oody = fopen("oody_h.txt","w+");
+    fp_oodz = fopen("oodz_h.txt","w+");
+
+    for(int j = 0; j < 2073600; j++) 
+    {
+        fprintf(fp_oodx, "%X\n",floatToBits(ray_oodx[j]));
+        fprintf(fp_oody, "%X\n",floatToBits(ray_oody[j]));
+        fprintf(fp_oodz, "%X\n",floatToBits(ray_oodz[j]));
+    }
+
+    fclose(fp_oodx);
+    fclose(fp_oody);
+    fclose(fp_oodz);
+    free(ray_oodx);
+    free(ray_oody);
+    free(ray_oodz);
+
+#endif 
+
+
+#if defined(printf_nodes_A)//是否输出内部节点
+    float* n0xy_x;
+    n0xy_x = (float*)malloc(sizeof(float)*node_nums);
+    n0xy_x = fetch_n0xyx((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+    FILE* fp_n0xy_x = NULL;
+    // FILE* fp_oody = NULL;
+    // FILE* fp_oodz = NULL;
+    fp_n0xy_x = fopen("n0xy_x.txt","w+");
+    // fp_oody = fopen("oody_h.txt","w+");
+    // fp_oodz = fopen("oodz_h.txt","w+");
+
+    // for(int j = 0; j < node_nums; j++) 
+    // {
+        // fprintf(fp_n0xy_x, "%X\n",floatToBits(n0xy_x[j]));
+        // fprintf(fp_oody, "%X\n",floatToBits(ray_oody[j]));
+        // fprintf(fp_oodz, "%X\n",floatToBits(ray_oodz[j]));
+    // }
+
+    // fclose(fp_n0xy_x);
+    // fclose(fp_oody);
+    // free(n0xy_x);
+    // free(ray_oody);
+    // free(ray_oodz);
 #endif 
 
 #if defined(DUMP_RAYS)
