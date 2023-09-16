@@ -115,7 +115,7 @@ TRACE_FUNC
                 rayBase = atomicAdd(&g_warpCounter[0], numTerminated);
 
             rayidx = rayBase + idxTerminated;
-            if (rayidx >= numRays)
+            if (rayidx >= 1)
                 break;
 
             // Fetch ray.
@@ -139,12 +139,25 @@ TRACE_FUNC
             oody  = origy * idiry;
             oodz  = origz * idirz;
 
+
             // for(int i = 0 ; i < 20; i++)
             // {
-            //     float4 node_a = FETCH_GLOBAL(nodesA, i * 4+1, float4);
-            //     float  n0xy_y =  node_a.y;
-            //     printf("n0xy_y [%d] = %X\n",i+1,__float_as_int(n0xy_y));
+            //     float4 tmp = FETCH_GLOBAL(nodesA, i * 4 + 3 , float4);
+            //     int2  cnodes= *(int2*)&tmp;
+            //     printf("cnodes.x [%d] = %d\n",i+1 , cnodes.x);
             // }
+
+
+            // for(int i = 0 ; i < 20; i++)
+            // {
+            //     float4 v00 = FETCH_GLOBAL(trisA, i * 3 + 0 , float4);
+            //     float4 v11 = FETCH_GLOBAL(trisA, i * 3 + 1 , float4);
+            //     float4 v22 = FETCH_GLOBAL(trisA, i * 3 + 2 , float4);
+            //     printf("v00.x [%d] = %X\n",i+1 , __float_as_int(v00.x));
+            //     printf("v11.x [%d] = %X\n",i+1 , __float_as_int(v11.x));
+            //     printf("v22.x [%d] = %X\n",i+1 , __float_as_int(v22.x));
+            // }
+
 
 
             // for(int ray_id = 0; ray_id < 10 ; ray_id ++)

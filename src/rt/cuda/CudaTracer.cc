@@ -35,14 +35,23 @@
 #include<iostream>
 
 #define ray_nums 2073600
-#define node_nums 105925
+#define node_nums 301376
+#define tri_nums 910348
 // #define printf_ray_o
 // #define printf_ray_d
 
 // #define printf_ray_idir
 // #define printf_ray_ood
 
-#define printf_nodes_A
+// #define printf_nodes_A
+// #define printf_nodes_B
+// #define printf_nodes_C
+// #define printf_nodes_D
+
+// #define printf_tri_x
+// #define printf_tri_y
+// #define printf_tri_z
+// #define printf_tri_w
 
 //#define DUMP_RAYS
 
@@ -216,7 +225,6 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
 #endif 
 
 //------------------------------------------------------------------------
-
 #if defined(printf_ray_d)//是否输出光线dirx到文件
 
     float* ray_dirx;
@@ -263,7 +271,6 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
     free(ray_dirw);
 
 #endif 
-
 
 //------------------------------------------------------------------------
 #if defined(printf_ray_idir)//是否输出光线idir到文件
@@ -341,31 +348,289 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
 
 #endif 
 
-
 #if defined(printf_nodes_A)//是否输出内部节点
     float* n0xy_x;
     n0xy_x = (float*)malloc(sizeof(float)*node_nums);
     n0xy_x = fetch_n0xyx((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
 
+    float* n0xy_y;
+    n0xy_y = (float*)malloc(sizeof(float)*node_nums);
+    n0xy_y = fetch_n0xyy((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+    float* n0xy_z;
+    n0xy_z = (float*)malloc(sizeof(float)*node_nums);
+    n0xy_z = fetch_n0xyz((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+    float* n0xy_w;
+    n0xy_w = (float*)malloc(sizeof(float)*node_nums);
+    n0xy_w = fetch_n0xyw((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+
     FILE* fp_n0xy_x = NULL;
-    // FILE* fp_oody = NULL;
-    // FILE* fp_oodz = NULL;
+    FILE* fp_n0xy_y = NULL;
+    FILE* fp_n0xy_z = NULL;
+    FILE* fp_n0xy_w = NULL;
     fp_n0xy_x = fopen("n0xy_x.txt","w+");
-    // fp_oody = fopen("oody_h.txt","w+");
-    // fp_oodz = fopen("oodz_h.txt","w+");
+    fp_n0xy_y = fopen("n0xy_y.txt","w+");
+    fp_n0xy_z = fopen("n0xy_z.txt","w+");
+    fp_n0xy_w = fopen("n0xy_w.txt","w+");
 
-    // for(int j = 0; j < node_nums; j++) 
-    // {
-        // fprintf(fp_n0xy_x, "%X\n",floatToBits(n0xy_x[j]));
-        // fprintf(fp_oody, "%X\n",floatToBits(ray_oody[j]));
-        // fprintf(fp_oodz, "%X\n",floatToBits(ray_oodz[j]));
-    // }
+    for(int j = 0; j < node_nums; j++) 
+    {
+        fprintf(fp_n0xy_x, "%X\n",floatToBits(n0xy_x[j]));
+        fprintf(fp_n0xy_y, "%X\n",floatToBits(n0xy_y[j]));
+        fprintf(fp_n0xy_z, "%X\n",floatToBits(n0xy_z[j]));
+        fprintf(fp_n0xy_w, "%X\n",floatToBits(n0xy_w[j]));
+    }
 
-    // fclose(fp_n0xy_x);
-    // fclose(fp_oody);
-    // free(n0xy_x);
-    // free(ray_oody);
-    // free(ray_oodz);
+    fclose(fp_n0xy_x);
+    fclose(fp_n0xy_y);
+    fclose(fp_n0xy_z);
+    fclose(fp_n0xy_w);
+    free(n0xy_x);
+    free(n0xy_y);
+    free(n0xy_z);
+    free(n0xy_w);
+
+#endif 
+
+#if defined(printf_nodes_B)//是否输出内部节点
+    float* n1xy_x;
+    n1xy_x = (float*)malloc(sizeof(float)*node_nums);
+    n1xy_x = fetch_n1xyx((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+    float* n1xy_y;
+    n1xy_y = (float*)malloc(sizeof(float)*node_nums);
+    n1xy_y = fetch_n1xyy((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+    float* n1xy_z;
+    n1xy_z = (float*)malloc(sizeof(float)*node_nums);
+    n1xy_z = fetch_n1xyz((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+    float* n1xy_w;
+    n1xy_w = (float*)malloc(sizeof(float)*node_nums);
+    n1xy_w = fetch_n1xyw((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+
+    FILE* fp_n1xy_x = NULL;
+    FILE* fp_n1xy_y = NULL;
+    FILE* fp_n1xy_z = NULL;
+    FILE* fp_n1xy_w = NULL;
+    fp_n1xy_x = fopen("n1xy_x.txt","w+");
+    fp_n1xy_y = fopen("n1xy_y.txt","w+");
+    fp_n1xy_z = fopen("n1xy_z.txt","w+");
+    fp_n1xy_w = fopen("n1xy_w.txt","w+");
+
+    for(int j = 0; j < node_nums; j++) 
+    {
+        fprintf(fp_n1xy_x, "%X\n",floatToBits(n1xy_x[j]));
+        fprintf(fp_n1xy_y, "%X\n",floatToBits(n1xy_y[j]));
+        fprintf(fp_n1xy_z, "%X\n",floatToBits(n1xy_z[j]));
+        fprintf(fp_n1xy_w, "%X\n",floatToBits(n1xy_w[j]));
+    }
+
+    fclose(fp_n1xy_x);
+    fclose(fp_n1xy_y);
+    fclose(fp_n1xy_z);
+    fclose(fp_n1xy_w);
+    free(n1xy_x);
+    free(n1xy_y);
+    free(n1xy_z);
+    free(n1xy_w);
+
+#endif 
+
+#if defined(printf_nodes_C)//是否输出内部节点
+    float* n2xy_x;
+    n2xy_x = (float*)malloc(sizeof(float)*node_nums);
+    n2xy_x = fetch_n2xyx((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+    float* n2xy_y;
+    n2xy_y = (float*)malloc(sizeof(float)*node_nums);
+    n2xy_y = fetch_n2xyy((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+    float* n2xy_z;
+    n2xy_z = (float*)malloc(sizeof(float)*node_nums);
+    n2xy_z = fetch_n2xyz((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+    float* n2xy_w;
+    n2xy_w = (float*)malloc(sizeof(float)*node_nums);
+    n2xy_w = fetch_n2xyw((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+
+    FILE* fp_n2xy_x = NULL;
+    FILE* fp_n2xy_y = NULL;
+    FILE* fp_n2xy_z = NULL;
+    FILE* fp_n2xy_w = NULL;
+    fp_n2xy_x = fopen("n2xy_x.txt","w+");
+    fp_n2xy_y = fopen("n2xy_y.txt","w+");
+    fp_n2xy_z = fopen("n2xy_z.txt","w+");
+    fp_n2xy_w = fopen("n2xy_w.txt","w+");
+
+    for(int j = 0; j < node_nums; j++) 
+    {
+        fprintf(fp_n2xy_x, "%X\n",floatToBits(n2xy_x[j]));
+        fprintf(fp_n2xy_y, "%X\n",floatToBits(n2xy_y[j]));
+        fprintf(fp_n2xy_z, "%X\n",floatToBits(n2xy_z[j]));
+        fprintf(fp_n2xy_w, "%X\n",floatToBits(n2xy_w[j]));
+    }
+
+    fclose(fp_n2xy_x);
+    fclose(fp_n2xy_y);
+    fclose(fp_n2xy_z);
+    fclose(fp_n2xy_w);
+    free(n2xy_x);
+    free(n2xy_y);
+    free(n2xy_z);
+    free(n2xy_w);
+
+#endif 
+
+#if defined(printf_nodes_D)//是否输出Child_Index
+    int* child_x;
+    child_x = (int*)malloc(sizeof(float)*node_nums);
+    child_x = fetch_child_x((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+    int* child_y;
+    child_y = (int*)malloc(sizeof(float)*node_nums);
+    child_y = fetch_child_y((float4*) (m_bvh->getNodeBuffer_dev() + nodeOfsA.x));
+
+    FILE* fp_child_x = NULL;
+    FILE* fp_child_y = NULL;
+    fp_child_x = fopen("leaf_x.txt","w+");
+    fp_child_y = fopen("leaf_y.txt","w+");
+
+    for(int j = 0; j < node_nums; j++) 
+    {
+        fprintf(fp_child_x, "%d\n",child_x[j]);
+        fprintf(fp_child_y, "%d\n",child_y[j]);
+    }
+
+    fclose(fp_child_x);
+    fclose(fp_child_y);
+    free(child_x);
+    free(child_y);
+
+#endif 
+
+#if defined(printf_tri_x)//是否输出tri_x
+    float* v00_x;
+    v00_x = (float*)malloc(sizeof(float)*node_nums);
+    v00_x = fetch_v00_x((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
+
+    float* v11_x;
+    v11_x = (float*)malloc(sizeof(float)*node_nums);
+    v11_x = fetch_v11_x((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
+
+    float* v22_x;
+    v22_x = (float*)malloc(sizeof(float)*node_nums);
+    v22_x = fetch_v22_x((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
+
+    FILE* fp_triangle_x = NULL;
+    fp_triangle_x = fopen("triangle_x.txt","w+");
+
+    for(int j = 0; j < node_nums; j++) 
+    {
+        fprintf(fp_triangle_x, "%X\n",floatToBits(v00_x[j]));
+        fprintf(fp_triangle_x, "%X\n",floatToBits(v11_x[j]));
+        fprintf(fp_triangle_x, "%X\n",floatToBits(v22_x[j]));
+    }
+
+    fclose(fp_triangle_x);
+    free(v00_x);
+    free(v11_x);
+    free(v22_x);
+
+#endif 
+
+#if defined(printf_tri_y)//是否输出tri_y
+    float* v00_y;
+    v00_y = (float*)malloc(sizeof(float)*node_nums);
+    v00_y = fetch_v00_y((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
+
+    float* v11_y;
+    v11_y = (float*)malloc(sizeof(float)*node_nums);
+    v11_y = fetch_v11_y((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
+
+    float* v22_y;
+    v22_y = (float*)malloc(sizeof(float)*node_nums);
+    v22_y = fetch_v22_y((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
+
+    FILE* fp_triangle_y = NULL;
+    fp_triangle_y = fopen("triangle_y.txt","w+");
+
+    for(int j = 0; j < node_nums; j++) 
+    {
+        fprintf(fp_triangle_y, "%X\n",floatToBits(v00_y[j]));
+        fprintf(fp_triangle_y, "%X\n",floatToBits(v11_y[j]));
+        fprintf(fp_triangle_y, "%X\n",floatToBits(v22_y[j]));
+    }
+
+    fclose(fp_triangle_y);
+    free(v00_y);
+    free(v11_y);
+    free(v22_y);
+
+#endif 
+
+#if defined(printf_tri_z)//是否输出tri_z
+    float* v00_z;
+    v00_z = (float*)malloc(sizeof(float)*node_nums);
+    v00_z = fetch_v00_z((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
+
+    float* v11_z;
+    v11_z = (float*)malloc(sizeof(float)*node_nums);
+    v11_z = fetch_v11_z((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
+
+    float* v22_z;
+    v22_z = (float*)malloc(sizeof(float)*node_nums);
+    v22_z = fetch_v22_z((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
+
+    FILE* fp_triangle_z = NULL;
+    fp_triangle_z = fopen("triangle_z.txt","w+");
+
+    for(int j = 0; j < node_nums; j++) 
+    {
+        fprintf(fp_triangle_z, "%X\n",floatToBits(v00_z[j]));
+        fprintf(fp_triangle_z, "%X\n",floatToBits(v11_z[j]));
+        fprintf(fp_triangle_z, "%X\n",floatToBits(v22_z[j]));
+    }
+
+    fclose(fp_triangle_z);
+    free(v00_z);
+    free(v11_z);
+    free(v22_z);
+
+#endif 
+
+#if defined(printf_tri_w)//是否输出tri_w
+    float* v00_w;
+    v00_w = (float*)malloc(sizeof(float)*node_nums);
+    v00_w = fetch_v00_w((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
+
+    float* v11_w;
+    v11_w = (float*)malloc(sizeof(float)*node_nums);
+    v11_w = fetch_v11_w((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
+
+    float* v22_w;
+    v22_w = (float*)malloc(sizeof(float)*node_nums);
+    v22_w = fetch_v22_w((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
+
+    FILE* fp_triangle_w = NULL;
+    fp_triangle_w = fopen("triangle_w.txt","w+");
+
+    for(int j = 0; j < node_nums; j++) 
+    {
+        fprintf(fp_triangle_w, "%X\n",floatToBits(v00_w[j]));
+        fprintf(fp_triangle_w, "%X\n",floatToBits(v11_w[j]));
+        fprintf(fp_triangle_w, "%X\n",floatToBits(v22_w[j]));
+    }
+
+    fclose(fp_triangle_w);
+    free(v00_w);
+    free(v11_w);
+    free(v22_w);
+
 #endif 
 
 #if defined(DUMP_RAYS)

@@ -70,6 +70,38 @@ extern "C"
     float* fetch_oodz(float4* ray_in);
     
     float* fetch_n0xyx(float4* node_a_addr);
+    float* fetch_n0xyy(float4* node_a_addr);
+    float* fetch_n0xyz(float4* node_a_addr);
+    float* fetch_n0xyw(float4* node_a_addr);
+
+    float* fetch_n1xyx(float4* node_a_addr);
+    float* fetch_n1xyy(float4* node_a_addr);
+    float* fetch_n1xyz(float4* node_a_addr);
+    float* fetch_n1xyw(float4* node_a_addr);
+
+    float* fetch_n2xyx(float4* node_a_addr);
+    float* fetch_n2xyy(float4* node_a_addr);
+    float* fetch_n2xyz(float4* node_a_addr);
+    float* fetch_n2xyw(float4* node_a_addr);
+
+    int* fetch_child_x(float4* node_a_addr);
+    int* fetch_child_y(float4* node_a_addr);
+
+    float* fetch_v00_x(float4* tri_a_addr);
+    float* fetch_v11_x(float4* tri_a_addr);
+    float* fetch_v22_x(float4* tri_a_addr);
+
+    float* fetch_v00_y(float4* tri_a_addr);
+    float* fetch_v11_y(float4* tri_a_addr);
+    float* fetch_v22_y(float4* tri_a_addr);
+
+    float* fetch_v00_z(float4* tri_a_addr);
+    float* fetch_v11_z(float4* tri_a_addr);
+    float* fetch_v22_z(float4* tri_a_addr);
+
+    float* fetch_v00_w(float4* tri_a_addr);
+    float* fetch_v11_w(float4* tri_a_addr);
+    float* fetch_v22_w(float4* tri_a_addr);
 }
 
 enum
