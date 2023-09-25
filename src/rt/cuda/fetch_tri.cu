@@ -8,7 +8,7 @@
 
 using namespace FW;
 
-#define tri_nums 910348
+#define tri_nums 250000
 
 __global__ void fetch_v00_x(float* v00_x, float4* tri_a_addr)
 {

@@ -1,100 +1,50 @@
-26
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
-0
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/sphere/sphere-cubecoords.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
+
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/chestnut/AL05a.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
+
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/cloud/altostratus00.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
+
+
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/gallery/gallery.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
+
+
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/holodeck/holodeck.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
+
+
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/lost-empire/lost_empire.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
+
+
+
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/lpshead/head.OBJ --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
+
+
+
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/roadBike/roadBike.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
+
+
+
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/sphere/sphere-cubecoords.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
+
+
+
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/vokselia_spawn/vokselia_spawn.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
+
+
+
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/white_oak/white_oak.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
+
+
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/mitsuba/mitsuba.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
+
+
+
+
+http://www.turbosquid.com http://www.modelup.com http://www.archibase.net/gdl http://modelsbank.3dm3.com http://www.max-realms.com http://www.3dlands.com http://www.evermotion.org/ http://archive3d.net/      
+
+
+
+
+
+## this one is ok(Mori Knob)
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/mori_knob/testObj.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
+

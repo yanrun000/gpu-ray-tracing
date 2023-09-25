@@ -36,7 +36,9 @@
         "array": "cpp",
         "initializer_list": "cpp",
         "__hash_table": "cpp",
-        "__split_buffer": "cpp"
+        "__split_buffer": "cpp",
+        "__node_handle": "cpp",
+        "iostream": "cpp"
     },
     "files.watcherExclude": {
         "**/target": true

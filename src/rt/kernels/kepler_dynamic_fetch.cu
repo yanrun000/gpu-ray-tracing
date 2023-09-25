@@ -115,7 +115,7 @@ TRACE_FUNC
                 rayBase = atomicAdd(&g_warpCounter[0], numTerminated);
 
             rayidx = rayBase + idxTerminated;
-            if (rayidx >= 1)
+            if (rayidx >= numRays)
                 break;
 
             // Fetch ray.
@@ -138,8 +138,10 @@ TRACE_FUNC
             oodx  = origx * idirx;
             oody  = origy * idiry;
             oodz  = origz * idirz;
+            // printf("rayid = %d\n",rayidx);
 
-
+            // printf("idirx = %X, idiry = %X, idirz = %X\n",__float_as_int(idirx),__float_as_int(idiry),__float_as_int(idirz));           
+            // printf("oodx = %X, oody = %X, oodz = %X\n",__float_as_int(oodx),__float_as_int(oody),__float_as_int(oodz));           
             // for(int i = 0 ; i < 20; i++)
             // {
             //     float4 tmp = FETCH_GLOBAL(nodesA, i * 4 + 3 , float4);
@@ -160,7 +162,7 @@ TRACE_FUNC
 
 
 
-            // for(int ray_id = 0; ray_id < 10 ; ray_id ++)
+            // for(int ray_id = 0; ray_id < 100; ray_id ++)
             // {
             //     float4 oa = FETCH_GLOBAL(rays, ray_id * 2 + 0, float4);
             //     float4 da = FETCH_GLOBAL(rays, ray_id * 2 + 1, float4);
@@ -174,10 +176,10 @@ TRACE_FUNC
             //     float oodx = idirx_out * oa.x;
             //     float oody = idiry_out * oa.y;
             //     float oodz = idirz_out * oa.z;
-            //     printf("idirx[%d]!!!! = %X\n",ray_id,__float_as_int(idirx_out));
+                // printf("idirx[%d]!!!! = %X\n",ray_id,__float_as_int(idirx_out));
             //     printf("idiry[%d]!!!! = %X\n",ray_id,__float_as_int(idiry_out));
             //     printf("idirz[%d]!!!! = %X\n",ray_id,__float_as_int(idirz_out));
-            //     printf("oodx[%d]!!!! = %X\n",ray_id,__float_as_int(oodx));
+                // printf("oodx[%d]!!!! = %X\n",ray_id,__float_as_int(oodx));
             //     printf("oody[%d]!!!! = %X\n",ray_id,__float_as_int(oody));
             //     printf("oodz[%d]!!!! = %X\n",ray_id,__float_as_int(oodz));
             // }
@@ -213,7 +215,12 @@ TRACE_FUNC
                 const float4 nz   = tex1Dfetch(t_nodesA, nodeAddr + 2); // (c0.lo.z, c0.hi.z, c1.lo.z, c1.hi.z)
                       float4 tmp  = tex1Dfetch(t_nodesA, nodeAddr + 3); // child_index0, child_index1
                       int2  cnodes= *(int2*)&tmp;
-  
+            
+            
+                // printf("n0xy.x = %X, n0xy.y = %X, n0xy.z = %X, n0xy.w = %X\n",__float_as_int(n0xy.x),__float_as_int(n0xy.y),__float_as_int(n0xy.z),__float_as_int(n0xy.w));           
+                // printf("n1xy.x = %X, n1xy.y = %X, n1xy.z = %X, n1xy.w = %X\n",__float_as_int(n1xy.x),__float_as_int(n1xy.y),__float_as_int(n1xy.z),__float_as_int(n1xy.w));           
+                // printf("nz.x = %X, nz.y = %X, nz.z = %X, nz.w = %X\n",__float_as_int(nz.x),__float_as_int(nz.y),__float_as_int(nz.z),__float_as_int(nz.w));           
+                // printf("cnodes.x = %X, cnodes.y = %X\n",cnodes.x,cnodes.y);           
   
                 // Intersect the ray against the child nodes.
 
@@ -227,6 +234,7 @@ TRACE_FUNC
                 const float c1hiz = nz.w   * idirz - oodz;
                 const float c0min = spanBeginKepler(c0lox, c0hix, c0loy, c0hiy, c0loz, c0hiz, tmin);
                 const float c0max = spanEndKepler  (c0lox, c0hix, c0loy, c0hiy, c0loz, c0hiz, hitT);
+
                 //float c0min = max4(fminf(c0lox, c0hix), fminf(c0loy, c0hiy), fminf(c0loz, c0hiz), tmin);
                 //float c0max = min4(fmaxf(c0lox, c0hix), fmaxf(c0loy, c0hiy), fmaxf(c0loz, c0hiz), hitT);
                 
@@ -238,12 +246,18 @@ TRACE_FUNC
                 const float c1max = spanEndKepler  (c1lox, c1hix, c1loy, c1hiy, c1loz, c1hiz, hitT);
                 //float c1min = max4(fminf(c1lox, c1hix), fminf(c1loy, c1hiy), fminf(c1loz, c1hiz), tmin);
                 //float c1max = min4(fmaxf(c1lox, c1hix), fmaxf(c1loy, c1hiy), fmaxf(c1loz, c1hiz), hitT);
+          
+                // printf("c0min = %X, c0max = %X, c1min = %X, c1max = %X\n",__float_as_int(c0min),__float_as_int(c0max),__float_as_int(c1min),__float_as_int(c1max));           
+                // printf("c0min = %f, c0max = %f, c1min = %f, c1max = %f\n",c0min,c0max,c1min,c1max);           
 
 
                 bool swp = (c1min < c0min);
 
                 bool traverseChild0 = (c0max >= c0min);
                 bool traverseChild1 = (c1max >= c1min);
+
+                // printf("traverseChild0 = %d\t",traverseChild0);
+                // printf("traverseChild1 = %d\t",traverseChild1);
 
                 // Neither child was intersected => pop stack.
 
@@ -307,6 +321,9 @@ TRACE_FUNC
             {
                 for (int triAddr = ~leafAddr;; triAddr += 3)
                 {
+
+                    // printf("triAddr = %d\n",triAddr);
+
                     // Tris in TEX (good to fetch as a single batch)
                     const float4 v00 = tex1Dfetch(t_trisA, triAddr + 0);
                     const float4 v11 = tex1Dfetch(t_trisA, triAddr + 1);
@@ -319,6 +336,8 @@ TRACE_FUNC
                     float Oz = v00.w - origx*v00.x - origy*v00.y - origz*v00.z;
                     float invDz = 1.0f / (dirx*v00.x + diry*v00.y + dirz*v00.z);
                     float t = Oz * invDz;
+                    
+                    // printf("\nOz = %X, invDz = %X, t = %X\n",__float_as_int(Oz),__float_as_int(invDz),__float_as_int(t));           
 
                     if (t > tmin && t < hitT)
                     {
@@ -328,6 +347,8 @@ TRACE_FUNC
                         float Dx = dirx*v11.x + diry*v11.y + dirz*v11.z;
                         float u = Ox + t*Dx;
 
+                    // printf("Ox = %X, Dx = %X, u = %X\n",__float_as_int(Ox),__float_as_int(Dx),__float_as_int(u));           
+
                         if (u >= 0.0f)
                         {
                             // Compute and check barycentric v.
@@ -335,6 +356,8 @@ TRACE_FUNC
                             float Oy = v22.w + origx*v22.x + origy*v22.y + origz*v22.z;
                             float Dy = dirx*v22.x + diry*v22.y + dirz*v22.z;
                             float v = Oy + t*Dy;
+                  
+                    // printf("Oy = %X, Dy = %X, v = %X\n",__float_as_int(Oy),__float_as_int(Dy),__float_as_int(v));           
 
                             if (v >= 0.0f && u + v <= 1.0f)
                             {
@@ -343,8 +366,14 @@ TRACE_FUNC
 
                                 hitT = t;
                                 hitIndex = triAddr;
+
+                                // printf("index = %d \n", rayidx);
+                                // printf("hitT = %X\n",__float_as_int(hitT));
+                                // printf("hitT = %X\n",__float_as_int(hitT));
                                 if (anyHit)
                                 {
+
+                                    
                                     nodeAddr = EntrypointSentinel;
                                     break;
                                 }
@@ -424,6 +453,7 @@ extern "C" float launch_tracingKernel(S32 nthreads, Vec2i& blockSize, int numRay
     cutilSafeCall(cudaEventRecord(start, 0));
     
     trace <<<dimGrid, dimBlock>>> (numRays, anyHit, rays, results, nodesA, nodesB, nodesC, nodesD, trisA, trisB, trisC, triIndices);
+    // trace <<<1, 1>>> (numRays, anyHit, rays, results, nodesA, nodesB, nodesC, nodesD, trisA, trisB, trisC, triIndices);
     
     // float4 ray_store[0];
     // int ray_id = 0

@@ -34,12 +34,12 @@
 
 #include<iostream>
 
-#define ray_nums 2073600
-#define node_nums 301376
-#define tri_nums 910348
+#define ray_nums 300000
+#define node_nums 50876
+#define tri_nums 250000
+
 // #define printf_ray_o
 // #define printf_ray_d
-
 // #define printf_ray_idir
 // #define printf_ray_ood
 
@@ -48,10 +48,10 @@
 // #define printf_nodes_C
 // #define printf_nodes_D
 
-// #define printf_tri_x
-// #define printf_tri_y
-// #define printf_tri_z
-// #define printf_tri_w
+#define printf_tri_x
+#define printf_tri_y
+#define printf_tri_z
+#define printf_tri_w
 
 //#define DUMP_RAYS
 
@@ -165,6 +165,7 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
     if(rays.getNeedClosestHit()) printf("Any Hit: FALSE\n");
     else printf("Any Hit: TRUE\n");
 
+    printf("second_fetch = %d \n\n", second_fetch);
    
     // printf("rays.x = %f\n",(float4*) rays.getRayBuffer_dev());
     // bool second_ray = m_second_ray;
@@ -176,23 +177,23 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
                          (float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsC.x), (int*) m_bvh->getTriIndexBuffer_dev());
 
 //------------------------------------------------------------------------
-
+// if(second_fetch){
 #if defined(printf_ray_o)//是否输出光线origx到文件
 
     float* ray_origx;
-    ray_origx = (float*)malloc(sizeof(float)*2073600);
+    ray_origx = (float*)malloc(sizeof(float)*ray_nums);
     ray_origx = fetch_origx((float4*) rays.getRayBuffer_dev());
 
     float* ray_origy;
-    ray_origy = (float*)malloc(sizeof(float)*2073600);  
+    ray_origy = (float*)malloc(sizeof(float)*ray_nums);  
     ray_origy = fetch_origy((float4*) rays.getRayBuffer_dev());
 
     float* ray_origz;
-    ray_origz = (float*)malloc(sizeof(float)*2073600);  
+    ray_origz = (float*)malloc(sizeof(float)*ray_nums);  
     ray_origz = fetch_origz((float4*) rays.getRayBuffer_dev());
 
     float* ray_origw;
-    ray_origw = (float*)malloc(sizeof(float)*2073600);  
+    ray_origw = (float*)malloc(sizeof(float)*ray_nums);  
     ray_origw = fetch_origw((float4*) rays.getRayBuffer_dev());
    
     FILE* fp_origix = NULL;
@@ -205,7 +206,7 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
     fp_origiw = fopen("tmin.txt","w+");
 
  
-    for(int j = 0; j < 2073600; j++) 
+    for(int j = 0; j < ray_nums; j++) 
     {
         fprintf(fp_origix, "%X\n",floatToBits(ray_origx[j]));
         fprintf(fp_origiy, "%X\n",floatToBits(ray_origy[j]));
@@ -228,19 +229,19 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
 #if defined(printf_ray_d)//是否输出光线dirx到文件
 
     float* ray_dirx;
-    ray_dirx = (float*)malloc(sizeof(float)*2073600);
+    ray_dirx = (float*)malloc(sizeof(float)*ray_nums);
     ray_dirx = fetch_dirx((float4*) rays.getRayBuffer_dev());
 
     float* ray_diry;
-    ray_diry = (float*)malloc(sizeof(float)*2073600);  
+    ray_diry = (float*)malloc(sizeof(float)*ray_nums);  
     ray_diry = fetch_diry((float4*) rays.getRayBuffer_dev());
 
     float* ray_dirz;
-    ray_dirz = (float*)malloc(sizeof(float)*2073600);  
+    ray_dirz = (float*)malloc(sizeof(float)*ray_nums);  
     ray_dirz = fetch_dirz((float4*) rays.getRayBuffer_dev());
 
     float* ray_dirw;
-    ray_dirw = (float*)malloc(sizeof(float)*2073600);  
+    ray_dirw = (float*)malloc(sizeof(float)*ray_nums);  
     ray_dirw = fetch_dirw((float4*) rays.getRayBuffer_dev());
    
     FILE* fp_dirx = NULL;
@@ -253,7 +254,7 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
     fp_dirw = fopen("hitT.txt","w+");
 
  
-    for(int j = 0; j < 2073600; j++) 
+    for(int j = 0; j < ray_nums; j++) 
     {
         fprintf(fp_dirx, "%X\n",floatToBits(ray_dirx[j]));
         fprintf(fp_diry, "%X\n",floatToBits(ray_diry[j]));
@@ -276,15 +277,15 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
 #if defined(printf_ray_idir)//是否输出光线idir到文件
 
     float* ray_idirx;
-    ray_idirx = (float*)malloc(sizeof(float)*2073600);
+    ray_idirx = (float*)malloc(sizeof(float)*ray_nums);
     ray_idirx = fetch_idirx((float4*) rays.getRayBuffer_dev());
 
     float* ray_idiry;
-    ray_idiry = (float*)malloc(sizeof(float)*2073600);  
+    ray_idiry = (float*)malloc(sizeof(float)*ray_nums);  
     ray_idiry = fetch_idiry((float4*) rays.getRayBuffer_dev());
 
     float* ray_idirz;
-    ray_idirz = (float*)malloc(sizeof(float)*2073600);  
+    ray_idirz = (float*)malloc(sizeof(float)*ray_nums);  
     ray_idirz = fetch_idirz((float4*) rays.getRayBuffer_dev());
    
     FILE* fp_idirx = NULL;
@@ -294,7 +295,7 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
     fp_idiry = fopen("idiry_h.txt","w+");
     fp_idirz = fopen("idirz_h.txt","w+");
 
-    for(int j = 0; j < 2073600; j++) 
+    for(int j = 0; j < ray_nums; j++) 
     {
         fprintf(fp_idirx, "%X\n",floatToBits(ray_idirx[j]));
         fprintf(fp_idiry, "%X\n",floatToBits(ray_idiry[j]));
@@ -314,15 +315,15 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
 #if defined(printf_ray_ood)//是否输出光线ood到文件
 
     float* ray_oodx;
-    ray_oodx = (float*)malloc(sizeof(float)*2073600);
+    ray_oodx = (float*)malloc(sizeof(float)*ray_nums);
     ray_oodx = fetch_oodx((float4*) rays.getRayBuffer_dev());
 
     float* ray_oody;
-    ray_oody = (float*)malloc(sizeof(float)*2073600);  
+    ray_oody = (float*)malloc(sizeof(float)*ray_nums);  
     ray_oody = fetch_oody((float4*) rays.getRayBuffer_dev());
 
     float* ray_oodz;
-    ray_oodz = (float*)malloc(sizeof(float)*2073600);  
+    ray_oodz = (float*)malloc(sizeof(float)*ray_nums);  
     ray_oodz = fetch_oodz((float4*) rays.getRayBuffer_dev());
    
     FILE* fp_oodx = NULL;
@@ -332,7 +333,7 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
     fp_oody = fopen("oody_h.txt","w+");
     fp_oodz = fopen("oodz_h.txt","w+");
 
-    for(int j = 0; j < 2073600; j++) 
+    for(int j = 0; j < ray_nums; j++) 
     {
         fprintf(fp_oodx, "%X\n",floatToBits(ray_oodx[j]));
         fprintf(fp_oody, "%X\n",floatToBits(ray_oody[j]));
@@ -347,6 +348,8 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
     free(ray_oodz);
 
 #endif 
+
+// }
 
 #if defined(printf_nodes_A)//是否输出内部节点
     float* n0xy_x;
@@ -497,13 +500,13 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
 
     FILE* fp_child_x = NULL;
     FILE* fp_child_y = NULL;
-    fp_child_x = fopen("leaf_x.txt","w+");
-    fp_child_y = fopen("leaf_y.txt","w+");
+    fp_child_x = fopen("leaf_H_x.txt","w+");
+    fp_child_y = fopen("leaf_H_y.txt","w+");
 
     for(int j = 0; j < node_nums; j++) 
     {
-        fprintf(fp_child_x, "%d\n",child_x[j]);
-        fprintf(fp_child_y, "%d\n",child_y[j]);
+        fprintf(fp_child_x, "%X\n",child_x[j]);
+        fprintf(fp_child_y, "%X\n",child_y[j]);
     }
 
     fclose(fp_child_x);
@@ -515,21 +518,21 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
 
 #if defined(printf_tri_x)//是否输出tri_x
     float* v00_x;
-    v00_x = (float*)malloc(sizeof(float)*node_nums);
+    v00_x = (float*)malloc(sizeof(float)*tri_nums);
     v00_x = fetch_v00_x((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
 
     float* v11_x;
-    v11_x = (float*)malloc(sizeof(float)*node_nums);
+    v11_x = (float*)malloc(sizeof(float)*tri_nums);
     v11_x = fetch_v11_x((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
 
     float* v22_x;
-    v22_x = (float*)malloc(sizeof(float)*node_nums);
+    v22_x = (float*)malloc(sizeof(float)*tri_nums);
     v22_x = fetch_v22_x((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
 
     FILE* fp_triangle_x = NULL;
     fp_triangle_x = fopen("triangle_x.txt","w+");
 
-    for(int j = 0; j < node_nums; j++) 
+    for(int j = 0; j < tri_nums; j++) 
     {
         fprintf(fp_triangle_x, "%X\n",floatToBits(v00_x[j]));
         fprintf(fp_triangle_x, "%X\n",floatToBits(v11_x[j]));
@@ -545,21 +548,21 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
 
 #if defined(printf_tri_y)//是否输出tri_y
     float* v00_y;
-    v00_y = (float*)malloc(sizeof(float)*node_nums);
+    v00_y = (float*)malloc(sizeof(float)*tri_nums);
     v00_y = fetch_v00_y((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
 
     float* v11_y;
-    v11_y = (float*)malloc(sizeof(float)*node_nums);
+    v11_y = (float*)malloc(sizeof(float)*tri_nums);
     v11_y = fetch_v11_y((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
 
     float* v22_y;
-    v22_y = (float*)malloc(sizeof(float)*node_nums);
+    v22_y = (float*)malloc(sizeof(float)*tri_nums);
     v22_y = fetch_v22_y((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
 
     FILE* fp_triangle_y = NULL;
     fp_triangle_y = fopen("triangle_y.txt","w+");
 
-    for(int j = 0; j < node_nums; j++) 
+    for(int j = 0; j < tri_nums; j++) 
     {
         fprintf(fp_triangle_y, "%X\n",floatToBits(v00_y[j]));
         fprintf(fp_triangle_y, "%X\n",floatToBits(v11_y[j]));
@@ -575,21 +578,21 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
 
 #if defined(printf_tri_z)//是否输出tri_z
     float* v00_z;
-    v00_z = (float*)malloc(sizeof(float)*node_nums);
+    v00_z = (float*)malloc(sizeof(float)*tri_nums);
     v00_z = fetch_v00_z((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
 
     float* v11_z;
-    v11_z = (float*)malloc(sizeof(float)*node_nums);
+    v11_z = (float*)malloc(sizeof(float)*tri_nums);
     v11_z = fetch_v11_z((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
 
     float* v22_z;
-    v22_z = (float*)malloc(sizeof(float)*node_nums);
+    v22_z = (float*)malloc(sizeof(float)*tri_nums);
     v22_z = fetch_v22_z((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
 
     FILE* fp_triangle_z = NULL;
     fp_triangle_z = fopen("triangle_z.txt","w+");
 
-    for(int j = 0; j < node_nums; j++) 
+    for(int j = 0; j < tri_nums; j++) 
     {
         fprintf(fp_triangle_z, "%X\n",floatToBits(v00_z[j]));
         fprintf(fp_triangle_z, "%X\n",floatToBits(v11_z[j]));
@@ -605,21 +608,21 @@ F32 CudaTracer::traceBatch(RayBuffer& rays)
 
 #if defined(printf_tri_w)//是否输出tri_w
     float* v00_w;
-    v00_w = (float*)malloc(sizeof(float)*node_nums);
+    v00_w = (float*)malloc(sizeof(float)*tri_nums);
     v00_w = fetch_v00_w((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
 
     float* v11_w;
-    v11_w = (float*)malloc(sizeof(float)*node_nums);
+    v11_w = (float*)malloc(sizeof(float)*tri_nums);
     v11_w = fetch_v11_w((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
 
     float* v22_w;
-    v22_w = (float*)malloc(sizeof(float)*node_nums);
+    v22_w = (float*)malloc(sizeof(float)*tri_nums);
     v22_w = fetch_v22_w((float4*) (m_bvh->getTriWoopBuffer_dev() + triOfsA.x));
 
     FILE* fp_triangle_w = NULL;
     fp_triangle_w = fopen("triangle_w.txt","w+");
 
-    for(int j = 0; j < node_nums; j++) 
+    for(int j = 0; j < tri_nums; j++) 
     {
         fprintf(fp_triangle_w, "%X\n",floatToBits(v00_w[j]));
         fprintf(fp_triangle_w, "%X\n",floatToBits(v11_w[j]));

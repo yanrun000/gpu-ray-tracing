@@ -7,10 +7,10 @@
 --mesh=/home/work/RayTracing/From_huang/scenes/rt/conference/conference.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="w:ie00yxXX00ND1b/03TZ6qy1egt3x/9///c/05frY109Qx7w////m100"
 
 ##fairyforest
+--mesh=/home/work/RayTracing/From_huang/scenes/rt/fairyforest/fairyforest.obj --sbvh-alpha=1.0e-5 --ao-radius=0.3 --camera="ViGsx/KxTFz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
 --mesh=/home/work/RayTracing/From_huang/scenes/rt/fairyforest/fairyforest.obj --sbvh-alpha=1.0e-5 --ao-radius=0.3 --camera="cIxMx/sK/Ty/EFu3z/5m9mWx/YPA5z/8///m007toC10AnAHx///Uy200"
 --mesh=/home/work/RayTracing/From_huang/scenes/rt/fairyforest/fairyforest.obj --sbvh-alpha=1.0e-5 --ao-radius=0.3 --camera="KI/Qz/zlsUy/TTy6z13BdCZy/LRxzy/8///m007toC10AnAHx///Uy200"
 --mesh=/home/work/RayTracing/From_huang/scenes/rt/fairyforest/fairyforest.obj --sbvh-alpha=1.0e-5 --ao-radius=0.3 --camera="mF5Gz1SuO1z/ZMooz11Q0bGz/CCNxx18///m007toC10AnAHx///Uy200"
---mesh=/home/work/RayTracing/From_huang/scenes/rt/fairyforest/fairyforest.obj --sbvh-alpha=1.0e-5 --ao-radius=0.3 --camera="ViGsx/KxTFz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
 
 ##sibenik
 --mesh=/home/work/RayTracing/From_huang/scenes/rt/sibenik/sibenik.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ytIa02G35kz1i:ZZ/0//iSay/5W6Ex19///c/05frY109Qx7w////m100"
@@ -20,14 +20,42 @@
 --mesh=/home/work/RayTracing/From_huang/scenes/rt/sibenik/sibenik.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="HJv//034:Rx1S4Xh/03dpXux1BVmGw/9///c/05frY109Qx7w////m100"
 
 ##sanmiguel
+--mesh=/home/work/RayTracing/From_huang/scenes/rt/sanmiguel/sanmiguel.obj --sbvh-alpha=1.0e-6 --ao-radius=1.5 --camera="AbE3/0LWiZz/4Ccj005X5X1z1qJ13x/8BfRky/5frY108Y/:x/v3/z100"
 --mesh=/home/work/RayTracing/From_huang/scenes/rt/sanmiguel/sanmiguel.obj --sbvh-alpha=1.0e-6 --ao-radius=1.5 --camera="Yciwz1oRQmz/Xvsm005CwjHx/b70nx18tVI7005frY108Y/:x/v3/z100"
 --mesh=/home/work/RayTracing/From_huang/scenes/rt/sanmiguel/sanmiguel.obj --sbvh-alpha=1.0e-6 --ao-radius=1.5 --camera="NhL2/2tO1w/0OIZh005DPZMz/xC9Cz18tVI7005frY108Y/:x/v3/z100"
---mesh=/home/work/RayTracing/From_huang/scenes/rt/sanmiguel/sanmiguel.obj --sbvh-alpha=1.0e-6 --ao-radius=1.5 --camera="AbE3/0LWiZz/4Ccj005X5X1z1qJ13x/8BfRky/5frY108Y/:x/v3/z100"
+
+
+##Mori_Knob
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/mori_knob/testObj.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="OaNay1BnAHz/aNatz11feeey/BnAny18///m007toC10BnAHx///Uy200"
+
+
+##dragon //仅仅primary
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_1/dragon.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="BnAXz1/////////////DwkLx/plcRw/8///m007toC10////z///Uy200"
+
+
+##hairball(这个是可以用的)//仅仅primary
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/hairball.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="/////0///c/2///k/21///Uy1///Ez/7///c/0YQuY109Qx7w////m100"
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/hairball.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="/////2/////2///U/21///Uy1///Ez/7///c/0YQuY109Qx7w////m100"
+
+
+##cornellbox
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/CornellBox/CornellBox-Glossy.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="/////0///c/2///k/21///Uy1///Ez/7///c/0YQuY109Qx7w////m100"
 
 
 ##bunny
 --mesh=/home/work/RayTracing/From_huang/scenes/rt_1/bunny.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="ShGMy/wx6Zz/Ypn8/05TJTmx1ljevx18///m007toC10AnAHx///Uy200"
 
+##
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/breakfast_room/breakfast_room.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="BnAXz1/////////////DwkLx/plcRw/8///m007toC10////z///Uy200"
 
-##dragon
---mesh=/home/work/RayTracing/From_huang/scenes/rt_1/dragon.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="BnAXz1/////////////DwkLx/plcRw/8///m007toC10////z///Uy200"
+##
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/sponza/sponza.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="BnAXz1/////////////DwkLx/plcRw/8///m007toC10////z///Uy200"
+
+
+##sponza
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_1/sponza.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="6omr/04j3200bR6Z/0/3ZEAz/x4smy19///c/05frY109Qx7w////m100"
+"///700///c/0/////21////z1////z19///c/0YQuY109Qx7w////m100"
+
+##gallery
+--mesh=/home/work/RayTracing/From_huang/scenes/rt_2/gallery/gallery.obj --sbvh-alpha=1.0e-5 --ao-radius=5 --camera="BnAXz1/////////////DwkLx/plcRw/8///m007toC10////z///Uy200"
+

@@ -109,7 +109,10 @@ TRACE_FUNC
         idiry = 1.0f / (fabsf(d.y) > ooeps ? d.y : copysignf(ooeps, d.y));
         idirz = 1.0f / (fabsf(d.z) > ooeps ? d.z : copysignf(ooeps, d.z));
         oodx = origx * idirx, oody = origy * idiry, oodz = origz * idirz;
-
+        
+        
+        printf("idirx = %X, idiry = %X, idirz = %X\n",__float_as_int(idirx),__float_as_int(idiry),__float_as_int(idirz));           
+        printf("oodx = %X, oody = %X, oodz = %X\n",__float_as_int(oodx),__float_as_int(oody),__float_as_int(oodz));           
         // Setup traversal.
 
         traversalStack[0] = EntrypointSentinel; // Bottom-most entry.
@@ -137,6 +140,11 @@ TRACE_FUNC
                   float4 tmp  = tex1Dfetch(t_nodesA, nodeAddr + 3); // child_index0, child_index1
                   int2  cnodes= *(int2*)&tmp;
 
+
+                printf("n0xy.x = %X, n0xy.y = %X, n0xy.z = %X, n0xy.w = %X\n",__float_as_int(n0xy.x),__float_as_int(n0xy.y),__float_as_int(n0xy.z),__float_as_int(n0xy.w));           
+                printf("n1xy.x = %X, n1xy.y = %X, n1xy.z = %X, n1xy.w = %X\n",__float_as_int(n1xy.x),__float_as_int(n1xy.y),__float_as_int(n1xy.z),__float_as_int(n1xy.w));           
+                printf("nz.x = %X, nz.y = %X, nz.z = %X, nz.w = %X\n",__float_as_int(nz.x),__float_as_int(nz.y),__float_as_int(nz.z),__float_as_int(nz.w));           
+                printf("cnodes.x = %X, cnodes.y = %X\n",cnodes.x,cnodes.y);       
             // Intersect the ray against the child nodes.
 
             const float c0lox = n0xy.x * idirx - oodx;
@@ -233,6 +241,8 @@ TRACE_FUNC
                 const float4 v11 = tex1Dfetch(t_trisA, triAddr + 1);
                 const float4 v22 = tex1Dfetch(t_trisA, triAddr + 2);
 
+
+                printf("triAddr = %d\n",triAddr);
                 // End marker (negative zero) => all triangles processed.
                 if (__float_as_int(v00.x) == 0x80000000)
                     break;
@@ -331,6 +341,7 @@ extern "C" float launch_tracingKernel(S32 nthreads, Vec2i& blockSize, int numRay
     cutilSafeCall(cudaEventRecord(start, 0));
     
     trace <<<dimGrid, dimBlock>>> (numRays, anyHit, rays, results, nodesA, nodesB, nodesC, nodesD, trisA, trisB, trisC, triIndices);
+    // trace <<<1, 1>>> (numRays, anyHit, rays, results, nodesA, nodesB, nodesC, nodesD, trisA, trisB, trisC, triIndices);
     
     cutilSafeCall(cudaEventRecord(stop, 0));
     cutilSafeCall(cudaEventSynchronize(stop));

@@ -376,7 +376,7 @@ void CameraControls::decodeSignature(const String& sig)
     const char* src = sig.getPtr();
     while (*src == ' ' || *src == '\t' || *src == '\n') src++;
     if (*src == '"') src++;
-    printf("src =%s", src );
+    // printf("src =%s\n", src );
     F32   px          = decodeFloat(src);
     F32   py          = decodeFloat(src);
     F32   pz          = decodeFloat(src);
@@ -398,14 +398,14 @@ void CameraControls::decodeSignature(const String& sig)
         return;*/
 
 
-    // printf("\npx = %f\n py = %f\n pz = %f\n",px,py,pz);
-    // printf(" forward.x = %f\n forward.y = %f\n forward.z = %f\n",forward.x,forward.y,forward.z);
-    // printf(" up.x = %f\n up.y = %f\n up.z = %f\n",up.x,up.y,up.z);
-    // printf(" speed = %f\n" ,speed);
-    // printf(" fov = %f\n",fov);
-    // printf(" znear = %f\n",znear);
-    // printf(" zfar = %f\n",zfar);
-    // printf(" zfar = %d\n",keepAligned);
+    printf("\npx = %f\n py = %f\n pz = %f\n",px,py,pz);
+    printf(" forward.x = %f\n forward.y = %f\n forward.z = %f\n",forward.x,forward.y,forward.z);
+    printf(" up.x = %f\n up.y = %f\n up.z = %f\n",up.x,up.y,up.z);
+    printf(" speed = %f\n" ,speed);
+    printf(" fov = %f\n",fov);
+    printf(" znear = %f\n",znear);
+    printf(" zfar = %f\n",zfar);
+    printf(" zfar = %d\n",keepAligned);
 
 
     m_position      = Vec3f(px, py, pz);

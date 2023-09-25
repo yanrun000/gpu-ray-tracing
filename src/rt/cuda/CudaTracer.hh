@@ -49,6 +49,7 @@ public:
     void                setBVH                  (CudaBVH* bvh)          { m_bvh = bvh; }
 
     F32                 traceBatch              (RayBuffer& rays); // returns launch time in seconds
+    bool                second_fetch;
 
 private:
     //CudaModule*         compileKernel           (void);

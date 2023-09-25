@@ -49,8 +49,8 @@ cudaGraphicsResource        *cudaResource;
 FW::U32*                    dev_imagePtr = NULL;
 
 //FW::Vec2i                   imageSize(1024, 768);
-FW::Vec2i                   imageSize(1920, 1080);
-//FW::Vec2i                   imageSize(640, 480);
+// FW::Vec2i                   imageSize(1920, 1080);
+FW::Vec2i                   imageSize(640, 480);
     
 PFNGLBINDBUFFERARBPROC      glBindBuffer = NULL;
 PFNGLDELETEBUFFERSARBPROC   glDeleteBuffers = NULL;
@@ -152,7 +152,7 @@ void FW::runBenchmark(
     // Setup renderer.
     Renderer::Params params;
     params.aoRadius = aoRadius;
-    params.numSamples = numSamples;
+    params.numSamples = 1;
     //params.sortSecondary = sortSecondary;
     params.sortSecondary = false;
 
@@ -160,12 +160,14 @@ void FW::runBenchmark(
     buildParams.splitAlpha = sbvhAlpha;
 
     Renderer renderer(imageSize);
+    renderer.second_fetch = false;
+
     renderer.setBuildParams(buildParams);
     renderer.setMesh(importMesh(meshFile));
     
-// #ifdef DISPLAY_RESULT
-//     initCudaGL();
-// #endif
+#ifdef DISPLAY_RESULT
+    initCudaGL();
+#endif
     
     //Cameras are moved out of the loop, because there is always one camera.
     CameraControls camera;
@@ -191,17 +193,19 @@ void FW::runBenchmark(
             
     while(renderer.nextBatch())
     {
+        renderer.second_fetch = true;
         totalTracingTime += renderer.traceBatch();//这个意味着trace的时间在增加
-// #ifdef DISPLAY_RESULT
-//         renderer.updateResult(dev_imagePtr);
-// #endif
+
+#ifdef DISPLAY_RESULT
+        renderer.updateResult(dev_imagePtr);
+#endif
     }    
     
     printf("Results = %.2f M Rays/s\n", (float) totalRays /((1000.0f) * totalTracingTime));
 
-// #ifdef DISPLAY_RESULT
-//     displayResult();
-// #endif
+#ifdef DISPLAY_RESULT
+    displayResult();
+#endif
 
 }
 

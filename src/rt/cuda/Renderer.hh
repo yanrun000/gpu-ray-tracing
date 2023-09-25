@@ -101,6 +101,7 @@ public:
     int                 getTotalNumRays     (void); // for selected ray type, excluding degenerates
     
     void                hashRays            (void);
+    bool                second_fetch;  
 
 private:
                         //Renderer            (const Renderer&); // forbidden
@@ -135,7 +136,8 @@ private:
     
     //Moved from scene directly to scene
     U32*                d_triMaterialColor;
-    U32*                d_triShadedColor;    
+    U32*                d_triShadedColor;  
+  
 };
 
 //------------------------------------------------------------------------

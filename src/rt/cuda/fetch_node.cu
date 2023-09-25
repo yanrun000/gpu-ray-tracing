@@ -8,7 +8,7 @@
 
 using namespace FW;
 
-#define node_nums 301376
+#define node_nums 50876
 
 __global__ void fetch_n0xy_x(float* n0xy_x, float4* node_a_addr)
 {

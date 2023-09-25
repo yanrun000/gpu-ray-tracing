@@ -116,7 +116,7 @@ void Renderer::beginFrame(const CameraControls& camera)
     // Second_Ray = false;
     // Setup BVH.
     m_tracer.setBVH(getCudaBVH());//这个实例化的结果是将getCudaBVH的值赋予m_bvh
-
+    // m_tracer.second_fetch = false;
     // Setup result image.
     const Vec2i& size = m_ViewSize;
     
@@ -139,29 +139,6 @@ void Renderer::beginFrame(const CameraControls& camera)
         m_tracer.traceBatch(m_primaryRays);    
     }
 
-    // Initialize state.
-
-    // float4* ray_o;
-    // // float4* ray_d;
-
-    // cudaMalloc((void**)&ray_o, sizeof(float4)* 1);
-    // // cudaMalloc((void**)&ray_d, sizeof(float4)* 100);
-
-    // // float4* ray_s = ;
-
-    // fetch_rays <<<1, 1,0 >>> (ray_o);
-
-    // float4 ray_out[1];
-
-    // cudaMemcpy(ray_out, ray_o, sizeof(float4)*1, cudaMemcpyDeviceToHost);
-
-
-    // for(int i = 0 ; i < 1 ; i++ ){
-    //     printf("ray  = %f\n", (ray_out[i].x));
-    // }
-
-
-    // cudaFree(ray_o);
 
 
 
@@ -318,6 +295,7 @@ bool Renderer::nextBatch(void)
 F32 Renderer::traceBatch(void)
 {
     FW_ASSERT(m_batchRays);
+    m_tracer.second_fetch = second_fetch;
     return m_tracer.traceBatch(*m_batchRays);
 }
 
