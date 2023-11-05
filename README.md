@@ -43,10 +43,40 @@ BVH:  **cudaBVH**
 2. 函数返回指针和CUDA返回数据测试。  
 上述代码均上传至github: https://github.com/yanrun000/ray_tracing_testcode.gi
 
-*2023.9.15*
+*2023.9.15-9.20记录实验结果*
 
 bunny   internal nodes  50876,三角形个数144500。
 
-dragon  internal nodes  301376,三角形个数910348。
+dragon  internal nodes  301376,三角形个数910348。(1.1 M)
 
-conference  internal nodes 105025,
+conference  internal nodes 105025,三角形个数350949   
+
+hairball  internal nodes 1249052,三角形个数6469561(6.9 M)  
+
+sponza  internal nodes 35907,三角形个数121384
+
+Mori Knob  internal nodes   3483，三角形个数12570
+
+## Primary  
+sponza  *597.51 Mray/s*      IST 46.97% TRV1 99.99% TRV2 99.99%    
+Mori Knob  *1271.61 Mray/s*  IST 99.83%  TRV1 87.53% TRV2 87.54%  
+hairball *280.49 Mray/s*     IST 10.63% TRV1 45.16% TRV2 34.75%  
+Dragon  *575.43 Mray/s*      IST 12.72%  TRV1 41.11% TRV2 42.76%  
+Bunny  *825.11 Mray/s*       IST 12.67%  TRV1 42.51%  TRV2 39.04%
+
+## Diffuse
+conference *831.28 Mray/s*  IST 73.14% TRV1 99.73% TRV2 99.38%  
+fairy   *678.77 Mray/s* IST 14.28% TRV1 96.42% TRV2 96.36%   
+sibenik  *286.97 Mray/s*    IST 24.59%  TRV1 62.72% TRV2 61.42%   
+san      *132.28 Mray/s*  IST 38.99%  TRV1 99.99% TRV2 99.99%   
+sponza   *325.33 Mray/s*  IST 50.35%  TRV1 99.99% TRV2 99.99%   
+Mori Knob  *1466.05 Mray/s*  IST 33.49%  TRV1 99.99% TRV2 99.99%
+
+## AO
+conference  *1478.43 Mray/s*  IST 50.09% TRV1 99.99% TRV2 99.99%  
+fairy   *1280.77 Mray/s* IST 83.56%  TRV1 99.99% TRV2 99.99%  
+sibenik   *1499.86 Mray/s* IST 29.88%  TRV1 99.99% TRV2 99.99%  
+san        *556.89 Mray/s*  IST 10.91% TRV1 99.99% TRV2 99.99%  
+sponza   *1022.61 Mray/s*   IST 35.55% TRV1 99.99% TRV2 99.99%  
+Mori Knob *2763.01 Mray/s*  IST 15.56%  TRV1 99.99% TRV2 99.99%  
+
